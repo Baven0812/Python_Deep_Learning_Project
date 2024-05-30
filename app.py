@@ -7,8 +7,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load the dataset
-dataset_path = 'path/to/your/dataset.csv'  # Replace with the path to your .csv file
-data = pd.read_csv(dataset_path)
+with open(r' house_price.csv') as file:
+    reader = csv.reader(file)
+    next(reader)  # Skip the header
+    data = [row for row in reader]
 
 # Assume the target variable is the last column
 X = data.iloc[:, :-1].values
