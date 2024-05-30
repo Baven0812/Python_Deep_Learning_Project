@@ -2,11 +2,20 @@ import tensorflow as tf
 from tensorflow.keras import layers, models
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
-from tensorflow.keras.datasets import boston_housing
 
 # Load the dataset
-(train_data, train_targets), (test_data, test_targets) = boston_housing.load_data()
+dataset_path = 'path/to/your/dataset.csv'  # Replace with the path to your .csv file
+data = pd.read_csv(dataset_path)
+
+# Assume the target variable is the last column
+X = data.iloc[:, :-1].values
+y = data.iloc[:, -1].values
+
+# Split the data into training and testing sets
+train_data, test_data, train_targets, test_targets = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Normalize the data
 scaler = StandardScaler()
